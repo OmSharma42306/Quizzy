@@ -1,8 +1,20 @@
 import './App.css'
+import Teacher from './components/Teacher'
+import TeacherDashboard from "./components/TeacherDashboard"
+import Student from './components/Student'
+import {Route,Routes} from "react-router-dom"
+import StudentDashboard from './components/StudentDashboard'
 
 function App() {  
   return (
-    <h1>Welcome to My Quiz App for students...</h1>   
+    <Routes>
+      <Route path='/teacher' element={<Teacher/>}></Route>
+      <Route path='/student' element={<Student/>}></Route>
+      <Route path='/teacherDashboard' element={<TeacherDashboard/>}></Route>
+      <Route path='/studentDashboard' element={<StudentDashboard/>}></Route>
+      
+      </Routes>
+  
   )
 }
 
