@@ -125,7 +125,7 @@ wss.on('connection',(ws : WebSocket)=>{
 
             return;
                 }
-                client.send(data,{binary : isBinary})
+                
             }
         })
     });
