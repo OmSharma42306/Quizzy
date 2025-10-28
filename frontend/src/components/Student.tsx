@@ -75,7 +75,7 @@ export default function Student() {
             "name": studentName
         }));
 
-        navigate('/studentDashboard')
+        navigate('/studentDashboard',{state : {uucmsNo,studentName,roomId}})
         console.log("Joining room:", roomId);
     }
 

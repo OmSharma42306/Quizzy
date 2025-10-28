@@ -39,6 +39,7 @@
 
 import { useEffect, useState } from "react";
 import { sockets } from "../sockets/ws";
+import { useLocation } from "react-router-dom";
 
 export default function StudentDashboard() {
     const [socket, setSocket] = useState<WebSocket>();
@@ -46,7 +47,12 @@ export default function StudentDashboard() {
     const [options, setOptions] = useState([]);
     const [timer, setTimer] = useState(60);
     const [selectedOption, setSelectedOption] = useState(null);
+    const [disableSubmitButton,setDisableSubmitButton] = useState<any>();
+    // maintaining state for submission seconds...
+    const [questionStartTime,setQuestionStartTime] = useState<number>(0);
 
+    const location = useLocation();
+    const {roomId,uucmsNo,studentName} = location.state;
     useEffect(() => {
         setSocket(sockets);
         console.log("socket connected....!");
@@ -71,6 +77,7 @@ export default function StudentDashboard() {
         setQuestion(question);
         setOptions(option);
         setTimer(60);
+        setQuestionStartTime(performance.now());
         setSelectedOption(null);
     }
 
@@ -206,11 +213,16 @@ export default function StudentDashboard() {
                 <button
                     onClick={() => {
                         if (selectedOption !== null) {
+                            const elapsed = ((performance.now() - questionStartTime) / 1000).toFixed(2);
+
+
                             console.log('Submitted answer:', options[selectedOption]);
                             // Add your submit logic here
+                            socket.send(JSON.stringify({  type : "submitAnswer",roomId : roomId, uucms : uucmsNo, selectedOption : selectedOption ,name : studentName, time : elapsed}));
+                            setDisableSubmitButton(true);
                         }
                     }}
-                    disabled={selectedOption === null}
+                    disabled={selectedOption === null || disableSubmitButton}
                     className={`relative px-12 py-4 text-xl font-bold text-white transition-all duration-300 shadow-2xl ${
                         selectedOption !== null
                             ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 border-4 border-green-300 hover:scale-105 cursor-pointer'
@@ -221,7 +233,9 @@ export default function StudentDashboard() {
                     }}
                 >
                     {selectedOption !== null ? '✓ SUBMIT ANSWER' : 'SELECT AN OPTION'}
+                    
                 </button>
+                
             </div>
 
             {/* Diamond Separator */}
