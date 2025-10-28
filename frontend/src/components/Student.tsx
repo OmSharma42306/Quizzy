@@ -52,7 +52,8 @@ import { sockets } from "../sockets/ws";
 import { useNavigate } from "react-router-dom";
 export default function Student() {
     const [socket, setSocket] = useState<WebSocket>();
-    const [uucmsNo, setUUCMSNo] = useState('');
+    // const [uucmsNo, setUUCMSNo] = useState('');
+    let uucmsNo = "U423";
     const [studentName, setStudentName] = useState('');
     const [roomId, setRoomId] = useState('');
     const navigate = useNavigate();
