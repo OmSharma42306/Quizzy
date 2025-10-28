@@ -71,7 +71,7 @@ export default function Student() {
         socket?.send(JSON.stringify({
             "type": "joinSession",
             "roomId": roomId,
-            "uucms": uucmsNo,
+            "uucms": "U423",
             "name": studentName
         }));
 
@@ -97,7 +97,7 @@ export default function Student() {
 
                 {/* Form Card */}
                 <div className="bg-gradient-to-br from-purple-800 to-purple-900 border-4 border-yellow-500 rounded-2xl p-8 shadow-2xl">
-                    <div className="mb-6">
+                    {/* <div className="mb-6">
                         <div className="flex items-center gap-3 mb-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center border-2 border-white">
                                 <span className="text-white font-bold">1</span>
@@ -113,12 +113,12 @@ export default function Student() {
                             className="w-full bg-purple-700 border-3 border-yellow-400 rounded-lg px-6 py-4 text-white text-lg focus:outline-none focus:border-yellow-300 focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-30 transition-all"
                             placeholder="Enter your UUCMS number..."
                         />
-                    </div>
+                    </div> */}
 
                     <div className="mb-6">
                         <div className="flex items-center gap-3 mb-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center border-2 border-white">
-                                <span className="text-white font-bold">2</span>
+                                <span className="text-white font-bold">1</span>
                             </div>
                             <label className="text-yellow-300 text-xl font-semibold">
                                 Your Name
@@ -136,7 +136,7 @@ export default function Student() {
                     <div className="mb-8">
                         <div className="flex items-center gap-3 mb-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center border-2 border-white">
-                                <span className="text-white font-bold">3</span>
+                                <span className="text-white font-bold">2</span>
                             </div>
                             <label className="text-yellow-300 text-xl font-semibold">
                                 Room ID

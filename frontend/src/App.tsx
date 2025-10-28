@@ -5,10 +5,12 @@ import Student from './components/Student'
 import {Route,Routes} from "react-router-dom"
 import StudentDashboard from './components/StudentDashboard'
 import Results from './components/Results'
+import LandingPage from './components/LandingPage'
 
 function App() {  
   return (
     <Routes>
+      <Route path='/' element={<LandingPage/>}></Route>
       <Route path='/teacher' element={<Teacher/>}></Route>
       <Route path='/student' element={<Student/>}></Route>
       <Route path='/teacherDashboard' element={<TeacherDashboard/>}></Route>
