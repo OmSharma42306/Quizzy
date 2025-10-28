@@ -218,7 +218,7 @@ export default function StudentDashboard() {
 
                             console.log('Submitted answer:', options[selectedOption]);
                             // Add your submit logic here
-                            socket.send(JSON.stringify({  type : "submitAnswer",roomId : roomId, uucms : uucmsNo, selectedOption : selectedOption ,name : studentName, time : elapsed}));
+                            socket.send(JSON.stringify({  type : "submitAnswer",roomId : roomId, uucms : uucmsNo, selectedOption : options[selectedOption] ,name : studentName, time : elapsed}));
                             setDisableSubmitButton(true);
                         }
                     }}
