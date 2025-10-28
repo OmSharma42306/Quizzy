@@ -110,17 +110,29 @@ wss.on('connection',(ws : WebSocket)=>{
                     if(!session) return;
                    console.log("ALL SESSIONS",session.responses);
                 console.log('correctOPtion',session.correctOption);
-        const x = session.responses.filter((d:any)=>d.option === session.correctOption);
-        console.log("filter",x);
-        const ranked = x.sort((a:any,b:any)=>a.time-b.time);
-        console.log("sor",ranked);
+        // const x = session.responses.filter((d:any)=>d.option === session.correctOption);
+        // console.log("filter",x);
+        // const ranked = x.sort((a:any,b:any)=>a.time-b.time);
+        // console.log("sor",ranked);
+
+        // / ✅ Modify time based on correctness + Sort by name
+const fullList = session.responses
+    .map((r:any) => {
+        if (r.option === session.correctOption) {
+            return { ...r, time: parseFloat(r.time) }; // keep correct response time
+        }
+        return { ...r, time: 0 }; // wrong → time becomes 0
+    })
+    .sort((a:any, b:any) => a.name.localeCompare(b.name)); // ✅ alphabetical ordering
+
+console.log("STUDENT RESULTS ✅", fullList);
 
 
-                    console.log("top3 ::::",ranked.slice(0,3));
+                    console.log("top3 ::::",fullList.slice(0,3));
                     
-                        session.teacherSocket?.send(JSON.stringify({
+                    session.teacherSocket?.send(JSON.stringify({
                 type: "result",
-                top3 : ranked.slice(0,3),
+                students : fullList,
             }));
 
             return;
