@@ -1,3 +1,3 @@
-export const sockets = new WebSocket("ws://localhost:8080");
-
+const socketUrl = import.meta.env.VITE_SOCKET_URL;
+export const sockets = new WebSocket(socketUrl);
 
