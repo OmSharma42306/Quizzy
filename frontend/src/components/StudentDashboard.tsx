@@ -73,7 +73,24 @@ export default function StudentDashboard() {
     // 🧠 Listen for question updates
     socket.onmessage = (data) => {
         const payload = JSON.parse(data.data);
+        console.log("payoload",payload)
         const msg = payload.payload;
+       
+        
+        
+        console.log("payload type",payload.type);
+        if(payload.type === "session-ended"){
+             console.log("Teacher ended session");
+             setQuestion(""); // clear the question UI
+            setOptions([]);
+            setDisableSubmitButton(true);
+            setShowToast(false);
+            
+        alert("🚨 Session ended! The teacher has left.");
+        return;
+        }
+
+         if (msg.type === "question"){
         const question = msg.question;
         const option = msg.options;
         setQuestion(question);
@@ -83,6 +100,8 @@ export default function StudentDashboard() {
         setSelectedOption(null);
         setDisableSubmitButton(false);
         setShowToast(false);
+        return;
+        }
     };
 
     const handleSubmit = () => {
