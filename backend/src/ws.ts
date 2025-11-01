@@ -1,6 +1,14 @@
+import http from "http";
 import { WebSocket, WebSocketServer } from "ws";
 
-const wss = new WebSocketServer({ port: 8080 });
+const server = http.createServer((req,res)=>{
+  res.writeHead(200,{ "Content-Type": "text/plain" });
+  res.end("WebSocket Server Running...")
+});
+
+const wss = new WebSocketServer({ server });
+
+server.listen(8080, () => console.log("Server running on 8080"));
 
 interface Student {
   id: string;
